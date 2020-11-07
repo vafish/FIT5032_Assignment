@@ -54,15 +54,15 @@ namespace FIT5032_Assignment
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1596070443931439",
+               appSecret: "cc496f13567bea6eaf1423532d801bca");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "27864268343-kqjfij6onkf1hcviblubdfc998i44mac.apps.googleusercontent.com",
+                ClientSecret = "EZRP_Os5NAub2zVzzY81a08P"
+            });
         }
     }
 }

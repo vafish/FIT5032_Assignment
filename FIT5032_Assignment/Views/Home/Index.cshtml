@@ -1,16 +1,75 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+<style>
+    .mySlides {
+        display: none
+    }
 
-    <div class="jumbotron">
-        <h1 style="font-size:40px">SL Tech Skills</h1>
-        
+    .w3-left, .w3-right, .w3-badge {
+        cursor: pointer
+    }
 
-        <p class="lead">
-            SL Tech Skills industry covers a various technical occupations in
-            professional fields such as laboratory technology, information technology and telecommunications technology etc.
-            This is an exciting industry to be involved in, and you’ll be amazed at the career opportunities available to you.
-        </p>
+    .w3-badge {
+        height: 13px;
+        width: 13px;
+        padding: 0
+    }
+
+    .center {
+        display: flex;
+        justify-content: center;
+    }
+    .img {
+        margin-top:100px;
+    }
+</style>
+
+
+<div class="jumbotron">
+    <h1>SL Tech Skills</h1>
+
+
+    <p>
+        SL Tech Skills industry covers a various technical occupations in
+        professional fields such as laboratory technology, information technology and telecommunications technology etc.
+        This is an exciting industry to be involved in, and you’ll be amazed at the career opportunities available to you.
+    </p>
+
+    <div class="w3-content w3-display-container img">
+        <div class="w3-content w3-section" style="max-width:640px">
+
+            <img class="mySlides w3-animate-fading" src="~/Imagesource/training1.jpg" style="width:80%" height="320">
+            <img class="mySlides w3-animate-fading" src="~/Imagesource/training2.jpg" style="width:80%" height="320">
+            <img class="mySlides w3-animate-fading" src="~/Imagesource/training3.jpg" style="width:80%" height="320">
+            <img class="mySlides w3-animate-fading" src="~/Imagesource/training4.jpg" style="width:80%" height="320">
+        </div>
+
+
+
     </div>
+</div>
 
 
+
+
+
+<script>
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) { myIndex = 1 }
+        x[myIndex - 1].style.display = "block";
+        setTimeout(carousel, 9000);
+    }
+</script>

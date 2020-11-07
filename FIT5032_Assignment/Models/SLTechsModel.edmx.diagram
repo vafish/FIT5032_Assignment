@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6d32496a0aaa4d29a3c0bddc894f8346" Name="Diagram1" ZoomLevel="86" >
+        <EntityTypeShape EntityType="SLTechsModel.Skill" Width="1.5" PointX="7.625" PointY="2" />
+        <EntityTypeShape EntityType="SLTechsModel.Course" Width="1.5" PointX="5" PointY="2" />
+        <EntityTypeShape EntityType="SLTechsModel.Image" Width="1.5" PointX="10.125" PointY="2.25" />
+        <EntityTypeShape EntityType="SLTechsModel.Location" Width="1.5" PointX="5" PointY="5.125" />
+        <EntityTypeShape EntityType="SLTechsModel.Student" Width="1.5" PointX="2" PointY="2" />
+        <EntityTypeShape EntityType="SLTechsModel.Rating" Width="1.5" PointX="1.75" PointY="5.875" />
+        <AssociationConnector Association="SLTechsModel.StudentCourse" />
+        <AssociationConnector Association="SLTechsModel.CourseLocation" />
+        <AssociationConnector Association="SLTechsModel.CourseSkill" />
+        <AssociationConnector Association="SLTechsModel.FK_StudentRating" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

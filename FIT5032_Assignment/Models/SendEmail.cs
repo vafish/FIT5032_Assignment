@@ -21,13 +21,14 @@ namespace FIT5032_Assignment.Models
         [Display(Name = "Contents:")]
         [Required(ErrorMessage = "Please enter the contents.")]
         public string Contents { get; set; }
+
         [Display(Name = "Select File Attachment:")]
         public HttpPostedFileBase Attachment { get; set; }
         [Display(Name = "From Email:")]
-        //[Required(ErrorMessage = "Please enter a valid email address.")]
+        [Required(ErrorMessage = "Please enter a valid email address.")]
         public string Email { get; set; }
         [Display(Name = "Password:")]
-       // [Required(ErrorMessage = "Please enter password.")]
+        [Required(ErrorMessage = "Please enter password.")]
         public string Password { get; set; }
     }
 }

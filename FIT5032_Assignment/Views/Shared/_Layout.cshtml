@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap .css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -17,7 +18,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("SL Science & Technology", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("SL Technology", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -25,6 +26,15 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Send Email", "SendEmail", "Home")</li>
+                    <li>@Html.ActionLink("Image", "Index", "Images")</li>
+                    <li>@Html.ActionLink("Course", "Index", "Courses")</li>
+                    <li>@Html.ActionLink("Experience", "Index", "Ratings")</li>
+
+                    @if (User.Identity.Name == "admin@123.com")
+                    {
+                        <li>@Html.ActionLink("Student Info", "Index", "Students")</li>
+                        <li>@Html.ActionLink("Locations", "Index", "Locations")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,7 +44,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - SL Science & Technology</p>
+            <p>&copy; @DateTime.Now.Year - SL Technology</p>
         </footer>
     </div>
 

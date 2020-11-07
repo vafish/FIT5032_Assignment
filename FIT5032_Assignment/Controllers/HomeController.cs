@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace FIT5032_Assignment.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -32,124 +33,63 @@ namespace FIT5032_Assignment.Controllers
         }
 
 
+        [Authorize]
         public ActionResult SendEmail()
         {
             return View(new SendEmail());
         }
 
-        [HttpPost]
-
-        public ActionResult SendEmail(SendEmail objModelMail, HttpPostedFileBase fileUploader)
-
+        public void sendEmails(SendEmail model, string toEmail)        
         {
-
-            if (ModelState.IsValid)
-
+            using (MailMessage mm = new MailMessage(model.Email, toEmail))
             {
-
-                string from = "hongyuchen@gmail.com"; //example:- sourabh9303@gmail.com
-
-                using (MailMessage mail = new MailMessage(from, objModelMail.ToEmail))
-
-                {
-
-                    mail.Subject = objModelMail.Subject;
-
-                    mail.Body = objModelMail.Contents;
-
-                    if (fileUploader != null)
-
+                mm.Subject = model.Subject;
+                mm.Body = model.Contents;
+                if (model.Attachment != null) {
+                    if (model.Attachment.ContentLength > 0)
                     {
-
-                        string fileName = Path.GetFileName(fileUploader.FileName);
-
-                        mail.Attachments.Add(new Attachment(fileUploader.InputStream, fileName));
-
+                        string fileName = Path.GetFileName(model.Attachment.FileName);
+                        mm.Attachments.Add(new Attachment(model.Attachment.InputStream, fileName));
                     }
-
-                    mail.IsBodyHtml = false;
-
-                    SmtpClient smtp = new SmtpClient();
-
+                }
+                
+                mm.IsBodyHtml = false;
+                using (SmtpClient smtp = new SmtpClient())
+                {
                     smtp.Host = "smtp.gmail.com";
-
                     smtp.EnableSsl = true;
-
-                    NetworkCredential networkCredential = new NetworkCredential(from, "Chy960710");
-
+                    NetworkCredential NetworkCred = new NetworkCredential(model.Email, model.Password);
                     smtp.UseDefaultCredentials = true;
-
-                    smtp.Credentials = networkCredential;
-
+                    smtp.Credentials = NetworkCred;
                     smtp.Port = 587;
 
-                    smtp.Send(mail);
-
-                    ViewBag.Message = "Sent";
-
-                    return View("Index", objModelMail);
-
+                    try
+                    {
+                       smtp.Send(mm);
+                        ViewBag.Message = "Email sent sucessfully!";
+                    }
+                   catch (Exception e)
+                    {
+                        throw e;
+                    }
                 }
-
             }
 
-            else
+          
+        }
 
-            {
+        [HttpPost]
+        public ActionResult SendEmail(SendEmail model)
+        {
 
-                return View();
-
-            }
-
+            sendEmails(model, model.ToEmail);
+            if (model.ToEmail2 != null)
+                sendEmails(model, model.ToEmail2);
+            if (model.ToEmail3 != null)
+                sendEmails(model, model.ToEmail3);
+            return View();
         }
 
     }
 
-
-
-        //public void sendEmails(SendEmail model, string emailadd)
-        //{
-        //    MailMessage mm = new MailMessage(model.Email, emailadd);
-
-
-        //    mm.Subject = model.Subject;
-        //    mm.Body = model.Contents;
-        //    if (model.Attachment != null)
-        //    {
-        //        if (model.Attachment.ContentLength > 0)
-        //        {
-        //            string fileName = Path.GetFileName(model.Attachment.FileName);
-        //            mm.Attachments.Add(new Attachment(model.Attachment.InputStream, fileName));
-        //        }
-        //    }
-        //    mm.IsBodyHtml = true;
-        //    SmtpClient smtp = new SmtpClient();
-        //    smtp.Host = "smtp.gmail.com";
-        //    NetworkCredential NetworkCred = new NetworkCredential(model.Email, model.Password);
-        //    smtp.EnableSsl = true;
-        //    smtp.UseDefaultCredentials = false;
-        //    smtp.Credentials = NetworkCred;
-        //    smtp.Port = 587;
-        //    try
-        //    {
-        //        smtp.Send(mm);
-        //        ViewBag.Message = "Email sent!";
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e;
-        //    }
-        //}
-        //[HttpPost]
-        //public ActionResult SendEmail(SendEmail model)
-        //{
-
-        //    sendEmails(model, model.ToEmail);
-        //    if (model.ToEmail2 != null)
-        //        sendEmails(model, model.ToEmail2);
-        //    if (model.ToEmail3 != null)
-        //        sendEmails(model, model.ToEmail3);
-        //    return View();
-        //}
-    //}
 }
